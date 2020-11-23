@@ -1,0 +1,74 @@
+<!-- Config -->
+<script type="text/javascript">
+    'use strict';
+    /*global RED*/
+    RED.nodes.registerType('socketio-config', {
+        category: 'config',
+        defaults: {
+            uri: {
+                value: 'http://localhost:3000',
+                required: true
+            },
+            options: {
+                value: '{ "forceNew": true }',
+                required: false
+            }
+        },
+        label: function() {
+            return this.uri;
+        }
+    });
+  </script>
+  
+  <script type="text/x-red" data-template-name="socketio-config">
+    <div class="form-row">
+      <label for="node-config-input-uri"><i class="fa fa-globe"></i> URI</label>
+      <input type="text" id="node-config-input-uri">
+    </div>
+    <div class="form-row">
+      <label for="node-config-input-options"><i class="fa fa-globe"></i> Options</label>
+      <input type="text" id="node-config-input-options">
+    </div>
+  </script>
+  
+  <!-- Client -->
+  <script type="text/javascript">
+    /*global RED*/
+    RED.nodes.registerType('socketio-client', {
+        category: 'network',
+        inputs: 1,
+        outputs: 1,
+        color: '#D8BFD8',
+        icon: 'socketio.png',
+        paletteLabel: 'Socket.IO Client',
+        defaults: {
+            server: {
+                value: '',
+                type: 'socketio-config'
+            },
+            name: {
+                value: ''
+            }
+        },
+        label: function() {
+            return this.name || 'Socket.IO Client';
+        }
+    });
+  </script>
+  
+  <script type="text/x-red" data-template-name="socketio-client">
+    <div class="form-row">
+      <label for="node-input-server"><i class="fa fa-globe"></i> Server</label>
+      <input type="text" id="node-input-server" placeholder="Server">
+    </div>
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/x-red" data-help-name="socketio-client">
+    <p>Socket.IO Client</p>
+    <p>Connects to a web server using Socket.IO Client and listens for all events. The SocketIO room is designated by the eventName property.</p>
+    <p>The outgoing <code>msg.payload</code> will be set to the data that came from the server.</p>
+  </script>
