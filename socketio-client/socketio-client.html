@@ -69,6 +69,11 @@
   
   <script type="text/x-red" data-help-name="socketio-client">
     <p>Socket.IO Client</p>
-    <p>Connects to a web server using Socket.IO Client and listens for all events. The SocketIO room is designated by the eventName property.</p>
-    <p>The outgoing <code>msg.payload</code> will be set to the data that came from the server.</p>
+    <p>Connects to a web server using Socket.IO Client, can emit any event to and listens for all events coming from that server</p>
+    <p>Input</p>
+    <p><code>msg.eventName</code> contains the name of the event to emit to the SocketIO server</p>
+    <p><code>msg.payload</code> ontains the data to be sent along with the event</p>
+    <p>Output</p>
+    <p><code>msg.eventName</code> contains the name of the event to emitted by the SocketIO server</p>
+    <p><code>msg.payload</code> ontains the data that was sent along with the event</p>
   </script>
