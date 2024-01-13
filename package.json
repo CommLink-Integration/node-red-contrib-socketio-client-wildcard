@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-socketio-client-wildcard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node-RED SocketIO client with wildcard listener and emitter ",
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,7 @@
   "author": "Hunter Grayson",
   "license": "MIT",
   "dependencies": {
-    "socket.io-client": "^2.3.0",
-    "socketio-wildcard": "^2.0.0"
+    "socket.io-client": "^4.7.3"
   },
   "node-red": {
     "nodes": {

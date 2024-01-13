@@ -4,8 +4,6 @@ module.exports = function(RED) {
     function connect(uri, options) {
         var io = require('socket.io-client')
         var socket = io(uri, options);
-        var patch = require('socketio-wildcard')(io.Manager);
-        patch(socket);
         return socket
     }
 
@@ -42,14 +40,20 @@ module.exports = function(RED) {
             }
         });
 
-        this.socket.on("*", function (event) {
-            node.send({ eventName: event.data[0], payload: event.data[1] });
-        })
+        this.socket.onAny((eventName, ...args) => {
+                node.send({ eventName:eventName, payload: args });
+        });
 
         node.on('input', function (msg) {
             const data = msg.payload;
             if (data) {
-                node.socket.emit(msg.eventName, data);
+                // if data is an array, emit each element as a separate argument
+                if(Array.isArray(data)) {
+                    node.socket.emit(msg.eventName, ...data);
+                }
+                else {
+                    node.socket.emit(msg.eventName, data);
+                }
             }
         });
 
